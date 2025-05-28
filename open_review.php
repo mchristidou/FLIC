@@ -17,7 +17,7 @@
 <main id="main" class="flex-grow-1">
     <span class="border">
         <div class="container">
-            <div class="row">
+            <div class="row"> <!--sdsdvd-->
                 <div class="col-8 m-4">
                     <?php $sql = "SELECT review_id, user_id, title, reviews.rating, review_text, movies.movie_id as id 
                     FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id WHERE review_id=:review_id";
