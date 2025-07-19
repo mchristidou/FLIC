@@ -21,4 +21,4 @@
     <script src="validation.js" type="text/javascript"></script>
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="background: linear-gradient(to bottom, rgb(111, 75, 159), rgb(248, 244, 255));">
+<body class="d-flex flex-column min-vh-100" style="background: linear-gradient(to bottom,rgb(182, 187, 252) ,rgb(248, 244, 255));">
