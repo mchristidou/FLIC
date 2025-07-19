@@ -114,3 +114,30 @@ function selected(element) {
 }
 
 
+//------------- STAR RATING --------------// 
+
+// Add event listener to star ratings for animation effect
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
+    star.addEventListener('click', function() {
+      this.style.transform = 'scale(1.2)';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200);
+    });
+  });
+});
+
+// Initialize star ratings for readonly containers
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.star-rating-readonly').forEach(container => {
+    const rating = container.getAttribute('data-rating'); // also returns "3"
+    const stars = container.querySelectorAll('svg');
+    stars.forEach((star, index) => {
+      if (index < rating) star.classList.add('filled');
+    });
+  });
+});
+
+
+
