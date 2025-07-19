@@ -73,27 +73,35 @@
     <div class="container headings">
         <div class="row">
             <div class="col-lg-4">
-                <img src="homepage/friends.jpg" alt="..." width="140" height="140" class="rounded-circle" />
+                <img src="homepage/boy_review.jpg" alt="..." width="140" height="140" class="shadow shadow-strong-lg rounded-circle" />
+                <!--<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>-->
 
-                <h2>Find Your Next Watch</h2>
-                <p>Get inspired by trending titles, popular genres, and personalized recommendations curated just for you.</p>
-                <p><a class="btn btn-secondary" href="#">Discover Movies &raquo;</a></p>
+                <div class="m-3">
+                    <h2>Reviews, Effortlessly</h2>
+                    <p>Craft detailed reviews, assign star ratings, and document your personal connection to every film you experience.</p>
+                    <p><a class="btn btn-secondary" href="#">Write a Review &raquo;</a></p>
+                </div>
             </div>
 
             <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-                <h2>Reviews, Effortlessly</h2>
-                <p>Craft detailed reviews, assign star ratings, and document your personal connection to every film you experience.</p>
-                <p><a class="btn btn-secondary" href="#">Write a Review &raquo;</a></p>
+                <img src="homepage/watching.jpg" alt="..." width="140" height="140" class="shadow shadow-strong-lg rounded-circle" />
+                <!--<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>-->
+                <div class="m-3">
+                    <h2>Find Your Next Watch</h2>
+                    <p>Get inspired by trending titles, popular genres, and personalized recommendations curated just for you.</p>
+                    <p><a class="btn btn-secondary" href="#">Discover Movies &raquo;</a></p>
+                </div>
             </div>
 
             <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <img src="homepage/organize.jpg" alt="..." width="140" height="140" class="shadow shadow-strong-lg rounded-circle" />
+                <!--<svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>-->
 
-                <h2>Organize Your Watchlist</h2>
-                <p>Keep track of movies you want to see, films you've loved, or even your guilty pleasures with custom lists.</p>
-                <p><a class="btn btn-secondary" href="#">Create a List &raquo;</a></p>
+                <div class="m-3">
+                    <h2>Organize Your Watchlist</h2>
+                    <p>Keep track of movies you want to see, films you've loved, or even your guilty pleasures with custom lists.</p>
+                    <p><a class="btn btn-secondary" href="#">Create a List &raquo;</a></p>
+                </div>
             </div>
         </div>
     </div>
