@@ -92,3 +92,43 @@ $enable-shadows: true;
   opacity: 0.6;
 }
 
+/*STAR RATING*/
+.star-rating {
+  direction: rtl;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #b1b1b1;
+  font-size: 24px;
+  padding: 0 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label,
+.star-rating input:checked~label {
+  color: #e8b200;
+}
+
+.star-rating-readonly {
+  display: inline-flex;
+  gap: 4px;
+
+  svg {
+    fill: #ddd; // Default (empty star)
+    transition: fill 0.3s ease;
+  }
+
+  svg.filled {
+    fill: #ffc107; // Gold color
+  }
+}
+
+
