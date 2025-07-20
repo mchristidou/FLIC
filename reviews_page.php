@@ -151,12 +151,15 @@
 
                                     <br/>
 
-                                    <!-- Displaying the review text -->
-                                    <?php //echo 'Rating:'.$record['rating'].'/5'.'<br/>'; ?>
+                                    <div class="review_text mt-1">
+                                        <?php if ($record['review_text']) {
+                                            echo $record['review_text'];
+                                        } else {
+                                            echo 'No review text provided.';
+                                        } ?>
+                                    </div>
 
-                                    <?php echo $record['review_text'];
-
-                                    //LIKE BUTTON 
+                                    <?php //LIKE BUTTON 
                                     $sql3 = "SELECT count(*) AS exist FROM review_likes WHERE user_id = :user_id AND review_id = :review_id";
                                     $query3 = $db->prepare($sql3);
                                     $query3->execute(array(':user_id'=>$user_id, ':review_id'=>$review_id)); 
@@ -292,8 +295,14 @@
                                     </div>
 
                                     <br/>
-
-                                    <?php echo $record['review_text']; ?>
+                                    
+                                    <div class="review_text mt-1"> 
+                                        <?php if ($record['review_text']) { //need to make text smaller
+                                            echo $record['review_text'];
+                                        } else {
+                                            echo 'No review text provided.';
+                                        } ?>
+                                    </div>
 
                                     <?php $sql3 = "SELECT count(*) AS exist FROM review_likes WHERE user_id = :user_id AND review_id = :review_id";
                                     $query3 = $db->prepare($sql3);
@@ -332,17 +341,6 @@
         </div>
     </span>
 </main>
-
-<script>
-    document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
-        star.addEventListener('click', function() {
-            this.style.transform = 'scale(1.2)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 200);
-        });
-    });
-</script>
 
 <?php require('footer.php'); ?>
 
