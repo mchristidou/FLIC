@@ -13,13 +13,17 @@
     $query = $db->prepare($sql);
     $query->execute(array(':new_avatar'=>$new_avatar, ':user_id'=>$user_id));
     $result = $query->rowCount();
+
+    // Update session variable - to be able to see the change immediately
+    $_SESSION['avatar'] = $new_avatar;
+
     $query->closeCursor();
 
     if ($result > 0) {
-        header("Location: myprofile.php?msg=Επιτυχία!Για να δεις την αλλαγή, συνδέσου ξανά!");
+        header("Location: myprofile.php?msg=Επιτυχής αλλαγή εικόνας προφίλ!");
         exit();
     } else {
-        header("Location: myprofile.php?msg=Αποτυχία!");
+        header("Location: myprofile.php?msg=Αποτυχής αλλαγή εικόνας προφίλ!");
         exit();
     }
     $db = null;
