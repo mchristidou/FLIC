@@ -26,6 +26,7 @@
     $result = $query->fetch();
     $genre = $result['name']; ?>
 
+    <!-- Movies you might like -->
     <div style="margin:20px 20px">
         <h3>Movies you might like...</h3>
 
@@ -56,6 +57,7 @@
         </div>
     </div>
 
+    <!-- Other movies -->
     <div style="margin:20px 20px">
         <h3>Other movies...</h3>
 
@@ -101,10 +103,6 @@
             <?php } ?>
         </div> 
 
-        <?php
-            
-        ?>
-
         <nav aria-label="Film pagination" style="margin-top:10px;">
             <ul class="nav justify-content-center pagination pagination-sm">
                 <?php if ($page == 1) { ?> <!-- Previous button -->
@@ -146,7 +144,8 @@
             </ul>
         </nav>
     </div>
-
+    
+    
     <?php $query->closeCursor();
     $query2->closeCursor();
     $db = null; ?>
