@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo $title;?></title>
+    <link rel="icon" href="favicon.png" type="image/x-icon">
 
     <link href="bootstrap-5.3.5-dist/css/bootstrap.css" rel="stylesheet">
     <script src="bootstrap-5.3.5-dist/js/bootstrap.bundle.js" type="text/javascript"></script>
