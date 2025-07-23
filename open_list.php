@@ -23,8 +23,32 @@
             <div class="row">
 
                 <div class="col">
-                    <!--empty-->
-                </div>
+
+                    <h2>Friends Lists</h2>
+
+                    <?php echo_msg() ?>
+
+                    <hr>
+
+                    <?php $user_id = $_SESSION['user_id'];
+                    $sql = "SELECT * FROM lists JOIN friends ON lists.user_id = friends.user_id1 
+                    JOIN users ON lists.user_id = users.user_id
+                    WHERE user_id2 = :user_id";
+                    $query = $db->prepare($sql);
+                    $query->execute(array(':user_id'=>$user_id)); 
+                    while ($record = $query->fetch()) { ?>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" style="float:left;"><?php
+                                    echo $record['title'];
+                                ?></a>
+                                <p><small style="float:right;"><?php echo $record['username'] ?></small></p>
+                            </div>
+                        </div>
+                        </br>
+                        <?php } 
+                        $query->closeCursor(); ?>
+                </div>    
 
                 <div class="col-6"> <!--OPENED LIST IN THE CENTER -->
 
@@ -110,12 +134,12 @@
 
                 <div class="col"> <!--MY LISTS-->
 
-                    <h2>My Lists</h2>
-
-                    <?php echo_msg() ?>
-
-                    <button name="submit" type="submit" id="submit" class="btn btn-dark" 
-                    data-bs-toggle="modal" data-bs-target="#addlist" >+ New List</button><br>
+                    <h2>
+                        My Lists
+                        <?php echo_msg() ?>
+                        <button name="submit" type="submit" id="submit" class="btn btn-dark"  style="float:right;"
+                        data-bs-toggle="modal" data-bs-target="#addlist" >+ New List</button>
+                    </h2>
 
                     <hr>
 
