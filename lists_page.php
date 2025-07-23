@@ -19,17 +19,16 @@
     <span class="border">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <!--MAYBE CALENDAR? OR NOTIF ABOUT UPCOMING SCREENINGS WITH FRIENDS-->
-                </div>
-                <div class="col-6">
+                <div class="col-8">
 
-                    <h2>My Lists</h2>
-
-                    <?php echo_msg() ?>
-
-                    <button name="submit" type="submit" id="submit" class="btn btn-dark" 
-                    data-bs-toggle="modal" data-bs-target="#addlist" >+ New List</button></br>
+                    <h2>
+                        My Lists
+                        <!-- Display message if any -->
+                        <?php echo_msg() ?>
+                        <!-- Button trigger modal to add new list -->
+                        <button name="submit" type="submit" id="submit" class="btn btn-dark" style="float:right;"
+                        data-bs-toggle="modal" data-bs-target="#addlist" >+ New List</button>
+                    </h2>
 
                     <hr>
 
