@@ -19,17 +19,14 @@
     <span class="border">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <!--empty-->
-                </div>
-                <div class="col-6">
+                <div class="col-8">
 
-                    <h2>My Reviews</h2>
-
-                    <?php echo_msg() ?>
-
-                    <button name="submit" type="submit" id="submit" class="btn btn-dark" 
-                    data-bs-toggle="modal" data-bs-target="#reviewmovie" >+ New Review</button></br>
+                    <h2>
+                        My Reviews
+                        <?php echo_msg() ?>
+                        <button name="submit" type="submit" id="submit" class="btn btn-dark" style="float:right;"
+                        data-bs-toggle="modal" data-bs-target="#reviewmovie" >+ New Review</button>
+                    </h2>
 
                     <hr>
 
@@ -265,7 +262,7 @@
                         $query2 = $db->prepare($sql2);
                         $query2->execute(array(':user'=>$user));
                         $result = $query2->fetch() ?>
-                        <div class="card w-100 mb-3 mt-4">
+                        <div class="card w-100 mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" style="float:left;"><?php
