@@ -75,31 +75,31 @@
         <ul class="nav justify-content-center pagination pagination-sm">
             <?php if ($page <= 1) { ?> <!-- Previous button -->
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
+                    <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
                 </li>
             <?php } else { ?> 
                 <li class="page-item">
-                    <a class="page-link text-dark" href="other_movies_ajax.php?page=<?php echo ($page-1); ?>" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
+                    <a class="page-link text-dark" href="javascript:void(0)" data-page="<?php echo ($page-1); ?>" role="button" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
                 </li>
             <?php } ?>
 
             <?php 
                 for ($i=1; $i<=$num_of_pages; $i++) {
                     if ($page == $i) {
-                        echo '<li class="page-item active"><a class="page-link bg-dark active" style="border-color:black;" href="other_movies_ajax.php?page='.$i.'">'.$i.'</a></li>';
+                        echo '<li class="page-item active"><a class="page-link bg-dark active" style="border-color:black;" data-page="'.$i.'" role="button" href="javascript:void(0)">'.$i.'</a></li>';
                     } else {
-                        echo '<li class="page-item"><a class="page-link text-dark" href="other_movies_ajax.php?page='.$i.'">'.$i.'</a></li>';
+                        echo '<li class="page-item"><a class="page-link text-dark" data-page="'.$i.'" role="button" href="javascript:void(0)">'.$i.'</a></li>';
                     }
                 }
             ?>
         
             <?php if ($page >= $num_of_pages) { ?> <!-- Next button -->
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" aria-label="Next"><span aria-hidden="true">&raquo</span></a>
+                    <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true" aria-label="Next"><span aria-hidden="true">&raquo</span></a>
                 </li>
             <?php } else { ?> 
                 <li class="page-item">
-                    <a class="page-link text-dark" href="other_movies_ajax.php?page=<?php echo ($page+1); ?>" aria-label="Next"><span aria-hidden="true">&raquo</span></a>
+                    <a class="page-link text-dark" href="javascript:void(0)" role="button" data-page="<?php echo ($page+1); ?>" aria-label="Next"><span aria-hidden="true">&raquo</span></a>
                 </li>
             <?php } ?>
         </ul>
