@@ -140,4 +140,52 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+//  ------------- AJAX LOADING FOR OTHER MOVIES SECTION --------------//
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('other-movies-section');
+
+    function loadMovies(page) {
+        // Save the current scroll position relative to the container
+        const containerTop = container.getBoundingClientRect().top + window.scrollY;
+        const currentScroll = window.scrollY - containerTop;
+
+        container.innerHTML = '<p>Loading movies...</p>';
+
+        fetch(`other_movies_ajax.php?page=${page}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(html => {
+                container.innerHTML = html;
+
+                // Restore scroll so the container stays in place
+                window.scrollTo({
+                    top: containerTop + currentScroll,
+                    behavior: 'instant' // or 'auto'
+                });
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                container.innerHTML = '<p style="color:red;">Failed to load movies. Please try again.</p>';
+            });
+    }
+
+    document.addEventListener('click', function(e) {
+        const clickedLink = e.target.closest('#other-movies-section a[data-page]');
+        
+        if (clickedLink) {
+            e.preventDefault();
+            const pageNumber = clickedLink.dataset.page;
+            if (pageNumber) loadMovies(pageNumber);
+        }
+    });
+
+    loadMovies(1);
+
+});
+
+
+
+
 
