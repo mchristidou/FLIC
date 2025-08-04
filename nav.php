@@ -32,7 +32,7 @@
                   <?php if (isset($_SESSION['username'])) { ?>
                         <ul class="navbar-nav ms-auto"> 
                               <form action="search_user.php" class="d-flex" role="search" method="get">
-                                    <input class="form-control me-2" id="search_value" name="search_value" value="<?php echo isset($_GET['search_value']) ? $_GET['search_value'] : null; ?>" type="search" placeholder="Search users" aria-label="Search">
+                                    <input class="form-control me-2" id="search_value" name="search_value" value="<?php echo isset($_GET['search_value']) ? $_GET['search_value'] : null; ?>" type="search" placeholder="Search here" aria-label="Search">
                                     <button class="btn btn-outline-light" type="submit">Search</button>
                               </form>   
                         </ul>
