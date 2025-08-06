@@ -141,8 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //  ------------- AJAX LOADING FOR OTHER MOVIES SECTION --------------//
-document.addEventListener('DOMContentLoaded', function() {
+function initOtherMoviesAjaxLoader() {
     const container = document.getElementById('other-movies-section');
+    if (!container) return; // Exit if the container doesn't exist
 
     function loadMovies(page) {
         // Save the current scroll position relative to the container
@@ -183,7 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadMovies(1);
 
-});
+};
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initOtherMoviesAjaxLoader);
 
 
 
