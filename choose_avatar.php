@@ -28,9 +28,4 @@
     }
     $db = null;
     ob_end_flush();
-
-
-
-
-
 ?>
