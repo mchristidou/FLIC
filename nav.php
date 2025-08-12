@@ -3,7 +3,10 @@
 <nav id="nav" class="navbar navbar-expand-sm bg-dark navbar-dark">
       <div class="container">
 
-            <a class="navbar-brand text-uppercase" href="home_page.php">FLIC</a>
+            <a class="navbar-brand text-uppercase text-center" href="home_page.php">
+                  <img src="favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                  FLIC
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                   <span class="navbar-toggler-icon"></span>
