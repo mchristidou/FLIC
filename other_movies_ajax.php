@@ -50,7 +50,7 @@
 
     <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
         <?php while ($record = $query->fetch()) { ?>
-            <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>">
+            <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
                 <div class="col">
                     <div class="card">
                         <?php $poster_sql = "SELECT path FROM movie_posters WHERE movie_id = :movie_id";
