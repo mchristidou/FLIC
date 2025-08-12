@@ -148,9 +148,9 @@
                 <?php $sql = "SELECT * FROM lists WHERE user_id = :user_id";
                 $query = $db->prepare($sql);
                 $query->execute(array(':user_id'=>$user_id)); ?>
-                <div class="row row-cols-1 row-cols-md-4 p-3">
+                <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
                     <?php while ($record = $query->fetch()) { ?>
-                        <a href="open_list.php?list_id=<?php echo $record['list_id'];?>">
+                        <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $record['list_id'];?>">
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
@@ -161,7 +161,41 @@
                         </a>    
                     <?php } $query->closeCursor(); ?>
                 </div>
-                <a href="lists_page.php" class="m-2">Add more?</a>
+
+                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="lists_page.php">
+                    Add More
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+                
+            </div>
+            <div class="row m-1 p-10">
+                <h4 class="ms-3 mt-3 p-1">Liked</h4> <!--fix-->
+                <?php $sql = "SELECT * FROM lists WHERE user_id = :user_id";
+                $query = $db->prepare($sql);
+                $query->execute(array(':user_id'=>$user_id)); ?>
+                <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
+                    <?php while ($record = $query->fetch()) { ?>
+                        <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $record['list_id'];?>">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $record['title'] ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>    
+                    <?php } $query->closeCursor(); ?>
+                </div>
+
+                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="lists_page.php">
+                    Add More
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+                
             </div>
         </div>
 
@@ -173,7 +207,7 @@
                 $query->execute(array(':user_id'=>$user_id)); ?>
                 <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
                     <?php while ($record = $query->fetch()) { ?>
-                        <a href="open_review.php?review_id=<?php echo $record['review_id'];?>&creator=<?php echo $username; ?>">
+                        <a style="text-decoration:none;" href="open_review.php?review_id=<?php echo $record['review_id'];?>&creator=<?php echo $username; ?>">
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
@@ -216,7 +250,13 @@
                         </a>
                     <?php } $query->closeCursor(); ?>
                 </div>
-                <a href="reviews_page.php" class="m-2">Add more?</a>
+                
+                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="reviews_page.php">
+                    Add More
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
             </div>
         </div>
 
@@ -227,11 +267,13 @@
                 $query->execute(array(':user_id'=>$user_id)); ?>
                 <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
                     <?php while ($record = $query->fetch()) { ?>
-                        <a href="public_profile.php?search_value=<?php echo $record['username']; ?>&user_id=<?php echo $record['user_id']; ?>">
+                        <a style="text-decoration:none;" href="public_profile.php?search_value=<?php echo $record['username']; ?>&user_id=<?php echo $record['user_id']; ?>">
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
+                                            <img src="avatars/avatar<?php echo $record['user_id']; ?>.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                            &nbsp;
                                             <?php echo $record['username'];?><br/>
                                         </h5>
                                     </div>
@@ -240,7 +282,7 @@
                         </a>
                     <?php } $query->closeCursor(); ?>
                 </div>
-                <a href="#" class="m-2">Add more?</a>
+
             </div>
         </div>
 
