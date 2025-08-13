@@ -120,7 +120,7 @@
                                 </div>
 
                                 <h5 class="card-title">
-                                    <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" style="float:left;"><?php
+                                    <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                         echo $record['title'];
                                     ?></a><br/>
                                 </h5>
@@ -265,7 +265,8 @@
                         <div class="card w-100 mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" style="float:left;"><?php
+                                    <!--img-->
+                                    <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                         echo $record['title']; 
                                     ?></a><br/>
                                 </h5>

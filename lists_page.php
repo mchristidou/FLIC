@@ -59,21 +59,23 @@
                         <form action="delete_list.php" method="get">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" style="float:left;"><?php
-                                        echo $record['title'];
-                                    ?></a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
+                                            echo $record['title'];
+                                        ?></a>
 
-                                    <input type="hidden" name="list_title" id="list_title" value="<?php echo $record['title']; ?>">
-                                    <input type="hidden" name="list_id" id="list_id" value="<?php echo $record['list_id']; ?>">
-                                    <div class="dropdown">
-                                        <button class="btn" type="button" style="float:right;" data-bs-toggle="dropdown" aria-expanded="false">
-                                            ...
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" type="button"
-                                            data-bs-target="#renamelist_<?php echo $record['list_id']; ?>" data-bs-toggle="modal">Rename</button></li>
-                                            <li><button class="dropdown-item" type="submit" name="submit" value="del">Delete</button></li>
-                                        </ul>
+                                        <input type="hidden" name="list_title" id="list_title" value="<?php echo $record['title']; ?>">
+                                        <input type="hidden" name="list_id" id="list_id" value="<?php echo $record['list_id']; ?>">
+                                        <div class="dropdown">
+                                            <button class="btn" type="button" style="float:right;" data-bs-toggle="dropdown" aria-expanded="false">
+                                                ...
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><button class="dropdown-item" type="button"
+                                                data-bs-target="#renamelist_<?php echo $record['list_id']; ?>" data-bs-toggle="modal">Rename</button></li>
+                                                <li><button class="dropdown-item" type="submit" name="submit" value="del">Delete</button></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +121,7 @@
                     while ($record = $query->fetch()) { ?>
                         <div class="card mt-3">
                             <div class="card-body">
-                                <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" style="float:left;"><?php
+                                <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                     echo $record['title'];
                                 ?></a>
                                 <p><small style="float:right;"><?php echo $record['username'] ?></small></p>
