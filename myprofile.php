@@ -147,9 +147,11 @@
                 <h4 class="ms-3 mt-3 p-1">Made by me</h4>
                 <?php $sql = "SELECT * FROM lists WHERE user_id = :user_id";
                 $query = $db->prepare($sql);
-                $query->execute(array(':user_id'=>$user_id)); ?>
+                $query->execute(array(':user_id'=>$user_id)); 
+                $has_lists = false; ?>
                 <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
-                    <?php while ($record = $query->fetch()) { ?>
+                    <?php while ($record = $query->fetch()) { 
+                        $has_lists = true; ?>
                         <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $record['list_id'];?>">
                             <div class="col">
                                 <div class="card">
@@ -158,25 +160,31 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>    
-                    <?php } $query->closeCursor(); ?>
-                </div>
-
-                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="lists_page.php">
-                    Add More
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
-                        <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                    </svg>
-                </a>
+                        </a>
+                    <?php } ?>
+                </div> 
                 
+                <div class="ms-1 text-center">
+                    <?php if (!$has_lists) {
+                        echo 'No liked lists found.';
+                    } ?>
+                </div>
+                <?php $query->closeCursor(); ?>
+
             </div>
             <div class="row m-1 p-10">
-                <h4 class="ms-3 mt-3 p-1">Liked</h4> <!--fix-->
-                <?php $sql = "SELECT * FROM lists WHERE user_id = :user_id";
+                <h4 class="ms-3 mt-3 p-1">Liked</h4>
+                <?php $sql = "SELECT list_likes.list_id, list_likes.user_id, lists.user_id as creator, title 
+                FROM list_likes 
+                JOIN lists 
+                ON lists.list_id = list_likes.list_id 
+                WHERE list_likes.user_id = :user_id AND list_likes.user_id != lists.user_id;";
                 $query = $db->prepare($sql);
-                $query->execute(array(':user_id'=>$user_id)); ?>
+                $query->execute(array(':user_id'=>$user_id)); 
+                $has_lists = false; ?>
                 <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
-                    <?php while ($record = $query->fetch()) { ?>
+                    <?php while ($record = $query->fetch()) { 
+                        $has_lists = true; ?>
                         <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $record['list_id'];?>">
                             <div class="col">
                                 <div class="card">
@@ -186,8 +194,15 @@
                                 </div>
                             </div>
                         </a>    
-                    <?php } $query->closeCursor(); ?>
+                    <?php } ?>
                 </div>
+
+                <div class="ms-1 text-center">
+                    <?php if (!$has_lists) {
+                        echo 'No liked lists found.';
+                    } ?>
+                </div>
+                <?php $query->closeCursor(); ?>
 
                 <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="lists_page.php">
                     Add More
@@ -201,12 +216,15 @@
 
         <div class="tab-pane fade" id="myreviews">
             <div class="row m-1 p-10">
+                <h4 class="ms-3 mt-3 p-1">Made by me</h4>
                 <?php $sql = "SELECT review_id, user_id, title, reviews.rating, review_text, movies.movie_id as id 
                 FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id WHERE user_id = :user_id";
                 $query = $db->prepare($sql);
-                $query->execute(array(':user_id'=>$user_id)); ?>
+                $query->execute(array(':user_id'=>$user_id));
+                $has_reviews = false; ?>
                 <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
-                    <?php while ($record = $query->fetch()) { ?>
+                    <?php while ($record = $query->fetch()) { 
+                        $has_reviews = true; ?>
                         <a style="text-decoration:none;" href="open_review.php?review_id=<?php echo $record['review_id'];?>&creator=<?php echo $username; ?>">
                             <div class="col">
                                 <div class="card">
@@ -248,15 +266,88 @@
                                 </div>
                             </div> 
                         </a>
-                    <?php } $query->closeCursor(); ?>
+                    <?php } ?>
                 </div>
-                
-                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="reviews_page.php">
+                <div class="ms-1 text-center">
+                    <?php if (!$has_reviews) {
+                        echo 'No reviews found.';
+                    } ?>
+                </div>
+                <?php $query->closeCursor(); ?>
+            </div>
+            <div class="row m-1 p-10">
+                <h4 class="ms-3 mt-3 p-1">Liked</h4>
+                <?php $sql = "SELECT review_likes.review_id, review_likes.user_id, reviews.user_id as creator,
+                reviews.movie_id, reviews.rating, reviews.review_text, title
+                FROM review_likes 
+                JOIN reviews 
+                ON reviews.review_id = review_likes.review_id JOIN movies 
+                ON reviews.movie_id = movies.movie_id
+                WHERE review_likes.user_id = :user_id AND review_likes.user_id != reviews.user_id;";
+                $query = $db->prepare($sql);
+                $query->execute(array(':user_id'=>$user_id)); 
+                $has_reviews = false; ?>
+                <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
+                    <?php while ($record = $query->fetch()) {
+                        $has_reviews = true; ?>
+                        <a style="text-decoration:none;" href="open_review.php?review_id=<?php echo $record['review_id'];?>&creator=<?php echo $username; ?>">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <?php echo $record['title'];?><br/>
+                                        </h5>
+                                        <p class="card-text">
+                                            <!-- STAR RATING -->
+                                            <div class="star-rating-readonly" data-rating="<?php echo $record['rating']; ?>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                </svg>
+                                            </div>
+
+                                            <br/>
+                                            
+                                            <div class="review_text mt-1">
+                                                <?php if ($record['review_text']) {
+                                                    echo $record['review_text'];
+                                                } else {
+                                                    echo 'No review text provided.';
+                                                } ?>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </a>
+                    <?php } ?> 
+                </div>
+
+                <div class="ms-1 text-center">
+                    <?php if (!$has_reviews) {
+                        echo 'No liked reviews found.';
+                    } ?>
+                </div>
+                <?php $query->closeCursor(); ?>
+
+                <a class="icon-link icon-link-hover text-dark m-2" style="text-decoration:none;" href="lists_page.php">
                     Add More
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
                         <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
                 </a>
+
             </div>
         </div>
 
