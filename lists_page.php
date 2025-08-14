@@ -103,7 +103,7 @@
                         </div>
                     <?php }
                     if ($query->rowCount() == 0) { ?>
-                        <p>No lists added yet!</p>
+                        <p class="text-center">No lists added yet!</p>
                     <?php }
                     $query->closeCursor(); ?>
                 </div>
@@ -113,13 +113,13 @@
                     <hr>
 
                     <?php $user_id = $_SESSION['user_id'];
-                    $sql = "SELECT * FROM lists JOIN friends ON lists.user_id = friends.user_id1 
+                    $sql = "SELECT * FROM lists JOIN friends ON lists.user_id = friends.user_id2 
                     JOIN users ON lists.user_id = users.user_id
-                    WHERE user_id2 = :user_id";
+                    WHERE user_id1 = :user_id";
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); 
                     while ($record = $query->fetch()) { ?>
-                        <div class="card mt-3">
+                        <div class="card">
                             <div class="card-body">
                                 <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                     echo $record['title'];
@@ -129,6 +129,9 @@
                         </div>
                         </br>
                         <?php } 
+                        if ($query->rowCount() == 0) { ?>
+                            <p class="text-center">No lists found!</p>
+                        <?php }
                         $query->closeCursor();
                         $db = null; ?>
                 </div>

@@ -242,7 +242,7 @@
                     </div>
                     <?php }
                     if ($query->rowCount() == 0) { ?>
-                        <p>No reviews added yet!</p>
+                        <p class="text-center">No reviews added yet!</p>
                     <?php }
                     $query->closeCursor(); ?>
                 </div>
@@ -251,8 +251,10 @@
 
                     <hr>
 
-                    <?php $sql = "SELECT review_id, user_id, title, reviews.rating, review_text, movies.movie_id as id 
-                    FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id where user_id != :user_id";
+                    <?php $sql = "SELECT * FROM reviews JOIN friends ON reviews.user_id = friends.user_id2 
+                    JOIN users ON reviews.user_id = users.user_id
+                    JOIN movies ON reviews.movie_id = movies.movie_id
+                    WHERE user_id1 = :user_id";
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id));
                     while($record = $query->fetch()) { ?>
@@ -265,8 +267,7 @@
                         <div class="card w-100 mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <!--img-->
-                                    <a href="movie_page.php?movie_id=<?php echo $record['id']; ?>" class="text-dark" style="float:left;text-decoration:none;"><?php
+                                    <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                         echo $record['title']; 
                                     ?></a><br/>
                                 </h5>
@@ -330,6 +331,9 @@
                                 </p>
                             </div>
                         </div>
+                    <?php }
+                    if ($query->rowCount() == 0) { ?>
+                        <p class="text-center">No reviews found!</p>
                     <?php } $query->closeCursor();
                     $query2->closeCursor();
                     $query3->closeCursor();
