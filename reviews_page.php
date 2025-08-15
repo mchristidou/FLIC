@@ -39,17 +39,24 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="add_review.php" method="get">
-                                        <select class="form-select mb-2" id="movie_id" name="movie_id">
+                                        <div style="position:relative;">
+                                            <input type="text" class="form-control" placeholder="Search Movie" onkeyup="showResult(this.value)">
+                                            <div id="livesearch" class="list-group" style="position:absolute; width:100%; z-index:1000;"></div>
+                                        </div>
+
+                                        <input type="hidden" id="movie_id" name="movie_id">
+
+                                        <!-- <select class="form-select mb-2" id="movie_id" name="movie_id">
                                             <option value="-1" selected="selected">Select Movie</option>
-                                            <?php $sql = "SELECT movie_id, title FROM movies;";
+                                            <?php /* $sql = "SELECT movie_id, title FROM movies;";
                                             $query = $db->prepare($sql);
                                             $query->execute(); 
                                             while ($result = $query->fetch()) { ?> 
                                             <option value="<?php echo $result['movie_id'] ?>">
                                                 <?php echo $result['title']; ?>
                                             </option>
-                                            <?php } $query->closeCursor(); ?>
-                                        </select>
+                                            <?php } $query->closeCursor(); */?>
+                                        </select> -->
                                         <!-- STAR RATING -->
                                         <div class="star-rating mb-3">
                                             <input type="radio" id="star1" name="rating" value="1">
