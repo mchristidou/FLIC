@@ -189,7 +189,30 @@ function initOtherMoviesAjaxLoader() {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', initOtherMoviesAjaxLoader);
 
+// ----------------------------- AJAX LIVE SEARCH -------------------------------//
+// This function is called when the user types in the search box
+// It sends an AJAX request to the server to get matching movie titles
+// and displays them in a dropdown list
+function showResult(str) {
+    if (str.length == 0) {
+        document.getElementById("livesearch").innerHTML = "";
+        document.getElementById("livesearch").style.border = "0px";
+        return;
+    }
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("livesearch").innerHTML = this.responseText;
+            //document.getElementById("livesearch").style.border = "1px solid #A5ACB2";
+        }
+    }
+    xmlhttp.open("GET", "livesearch.php?q=" + encodeURIComponent(str), true);
+    xmlhttp.send();
+}
 
-
-
-
+function selectMovie(id, title) {
+    document.querySelector('input[onkeyup]').value = title; // set main input
+    document.getElementById('movie_id').value = id; // set hidden id
+    document.getElementById("livesearch").innerHTML = "";
+    document.getElementById("livesearch").style.border = "0px";
+}
