@@ -45,6 +45,9 @@
                   <ul class="navbar-nav ms-auto">
                         <?php if (isset($_SESSION['username'])) { ?> 
                               <li class="nav-item"><?php echo '<div class="nav-link active">Hi '.$_SESSION['username'].'! </div>'; ?></li>
+                              <div class="nav-item ms-1">
+                                    <img src="avatars/<?php echo $_SESSION['avatar']; ?>" class="rounded-circle" width="35" height="35" alt="Avatar">
+                              </div>
                         <?php } else { ?>
 
                               <button name="submit" type="submit" id="submit" class="btn m-1 btn-outline-light" 
