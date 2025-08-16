@@ -26,7 +26,7 @@
                     <div class="carousel-caption text-start">
                         <h1>Get started with FLIC.</h1>
                         <p>Start tracking, rating, and sharing your film experiences by using FLIC's platform.</p>
-                        <p><a class="btn btn-lg btn-dark" href="signup.php">Sign up today</a></p>
+                        <p><a class="btn btn-lg btn-light" href="signup.php">Sign up today</a></p>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <div class="carousel-caption">
                         <h1>Review movies you've watched.</h1>
                         <p>Your unique take on movies helps others discover new favorites and sparks lively discussions.</p>
-                        <p><a class="btn btn-lg btn-dark" href="reviews_page.php">Learn more</a></p>
+                        <p><a class="btn btn-lg btn-light" href="reviews_page.php">Learn more</a></p>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     <div class="carousel-caption text-end">
                         <h1>Create unique lists.</h1>
                         <p>Create lists for any mood, theme, or cinematic adventure.</p>
-                        <p><a class="btn btn-lg btn-dark" href="lists_page.php">Browse lists</a></p>
+                        <p><a class="btn btn-lg btn-light" href="lists_page.php">Browse lists</a></p>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="m-3">
                     <h2>Reviews, Effortlessly</h2>
                     <p>Craft detailed reviews, assign star ratings, and document your personal connection to every film you experience.</p>
-                    <p><a class="btn btn-secondary" href="reviews_page.php">Write a Review &raquo;</a></p>
+                    <p><a class="btn btn-dark" href="reviews_page.php">Write a Review &raquo;</a></p>
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
                 <div class="m-3">
                     <h2>Find Your Next Watch</h2>
                     <p>Get inspired by trending titles, popular genres, and personalized recommendations curated just for you.</p>
-                    <p><a class="btn btn-secondary" href="films_page.php">Discover Movies &raquo;</a></p>
+                    <p><a class="btn btn-dark" href="films_page.php">Discover Movies &raquo;</a></p>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
                 <div class="m-3">
                     <h2>Organize Your Watchlist</h2>
                     <p>Keep track of movies you want to see, films you've loved, or even your guilty pleasures with custom lists.</p>
-                    <p><a class="btn btn-secondary" href="lists_page.php">Create a List &raquo;</a></p>
+                    <p><a class="btn btn-dark" href="lists_page.php">Create a List &raquo;</a></p>
                 </div>
             </div>
         </div>
