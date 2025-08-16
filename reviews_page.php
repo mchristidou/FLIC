@@ -39,11 +39,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="add_review.php" method="get">
-                                        <div style="position:relative;">
+                                        <div style="position:relative;"> <!-- SEARCH MOVIE -->
                                             <input type="text" class="form-control" placeholder="Search Movie" onkeyup="showResult(this.value)">
                                             <div id="livesearch" class="list-group" style="position:absolute; width:100%; z-index:1000;"></div>
                                         </div>
-
                                         <input type="hidden" id="movie_id" name="movie_id">
 
                                         <!-- <select class="form-select mb-2" id="movie_id" name="movie_id">
