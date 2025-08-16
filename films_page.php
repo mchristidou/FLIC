@@ -26,6 +26,38 @@
     $result = $query->fetch();
     $genre = $result['name']; ?>
 
+    <!-- Top Movies -->
+    <div style="margin:20px 20px">
+        <h3>Top Movies</h3>
+
+        <?php $sql = "SELECT * FROM movies  ORDER BY rating DESC LIMIT 4";
+        $query = $db->prepare($sql);
+        $query->execute(); ?>
+        <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
+            <?php while ($record = $query->fetch()) { ?>
+                <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
+                    <div class="col">
+                        <div class="card">
+                            <?php $sql2 = "SELECT path FROM movie_posters WHERE movie_id = :movie_id";
+                            $query2 = $db->prepare($sql2);
+                            $query2->execute(array(':movie_id'=>$record['movie_id']));
+                            $results = $query2->fetch(); ?>
+                            <?php if (!empty($results['path'])) { ?>
+                                <img src="<?php echo $results['path'];?>" class="card-img-top" alt="...">
+                            <?php } ?>
+                            <div class="card-body">
+                                    <h5 class="card-title"><?php echo $record['title'] ?></h5>
+                                    <p class="card-text">Genre: <?php echo $record['genre'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php $query2->closeCursor(); ?>
+                </a>    
+            <?php } ?>
+            <?php $query->closeCursor(); ?>
+        </div>
+    </div>
+
     <!-- Movies you might like -->
     <div style="margin:20px 20px">
         <h3>Movies you might like...</h3>
