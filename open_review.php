@@ -120,9 +120,9 @@
                     <hr>
 
                     <?php $sql = "SELECT review_id, user_id, title, reviews.rating, review_text, movies.movie_id as id 
-                    FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id where user_id != :user_id";
+                    FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id where user_id != :user_id AND review_id != :review_id";
                     $query = $db->prepare($sql);
-                    $query->execute(array(':user_id'=>$user_id));
+                    $query->execute(array(':user_id'=>$user_id, ':review_id'=>$review_id));
                     while($record = $query->fetch()) { ?>
                         <?php $user = $record['user_id']; 
                         $review = $record['review_id'];
@@ -197,9 +197,11 @@
                                 </p>
                             </div>
                         </div>
+                        <?php } if ($query->rowCount() == 0) { ?>
+                            <p class="text-center">No other friend reviews found!</p>
                         <?php } $query->closeCursor();
-                    $query2->closeCursor();
-                    $query3->closeCursor();
+                    if (isset($query2)) $query2->closeCursor();
+                    if (isset($query3)) $query3->closeCursor();
                     $db = null; ?>
                 </div>
             </div>
