@@ -21,7 +21,7 @@
             <img src="profile.jpg" id="avatar" class="rounded-pill" style="width:100px; height:100px;" alt="Avatar" data-bs-toggle="modal" data-bs-target="#chooseAvatar">
         <?php } else { ?>
             <img src="avatars/<?php echo $avatar; ?>" id="avatar" class="rounded-pill" style="width:100px; height:100px;" alt="Avatar" data-bs-toggle="modal" data-bs-target="#chooseAvatar">
-        <?php } ?> 
+        <?php } ?>
         
         <div class="modal fade" id="chooseAvatar" tabindex="-1" aria-labelledby="chooseAvatarLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -143,6 +143,7 @@
 
     <div class="tab-content">
         <div class="tab-pane active" id="mylists">
+            <!-- Display lists made by the user -->
             <div class="row m-1 p-10">
                 <h4 class="ms-3 mt-3 p-1">Made by me</h4>
 
@@ -178,6 +179,7 @@
 
             <hr>
 
+            <!-- Display lists liked by the user -->
             <div class="row m-1 p-10">
                 <h4 class="ms-3 mt-3 p-1">Liked</h4>
 
@@ -224,6 +226,7 @@
         </div>
 
         <div class="tab-pane fade" id="myreviews">
+            <!-- Display reviews made by the user -->
             <div class="row m-1 p-10">
                 <h4 class="ms-3 mt-3 p-1">Made by me</h4>
 
@@ -290,6 +293,7 @@
 
             <hr> 
 
+            <!-- Display reviews liked by the user -->
             <div class="row m-1 p-10">
                 <h4 class="ms-3 mt-3 p-1">Liked</h4>
 
@@ -370,6 +374,7 @@
         </div>
 
         <div class="tab-pane fade" id="myfriends">
+            <!-- Display friends of the user -->
             <div class="row m-1 p-10">
                 <div style="overflow-y: auto; max-height: 160px;">
                     <?php $sql = "SELECT user_id, username FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
