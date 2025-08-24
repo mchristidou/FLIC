@@ -7,6 +7,14 @@
     $search_value = $_GET['search_value'];
     $user_id = $_GET['user_id']; //user_id of the profile being viewed
     $avatar = $_SESSION['avatar'];
+    
+    //get username of the profile being viewed
+    $sql = "SELECT username FROM users WHERE user_id = :id;";
+    $query = $db->prepare($sql);
+    $query->execute(array(':id'=>$user_id));
+    $res = $query->fetch();
+    $username = $res['username'];
+    $query->closeCursor();
 
     $title = "FLIC - Film Lovers Interacting & Connecting";
 
