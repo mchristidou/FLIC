@@ -26,7 +26,11 @@
                     <div class="carousel-caption text-start">
                         <h1>Get started with FLIC.</h1>
                         <p>Start tracking, rating, and sharing your film experiences by using FLIC's platform.</p>
-                        <p><a class="btn btn-lg btn-light" href="signup.php">Sign up today</a></p>
+                        <?php if (!isset($_SESSION['user_id'])) { ?>
+                            <p><a class="btn btn-lg btn-light" href="signup.php">Sign up today</a></p>
+                        <?php } else { ?>
+                            <p><a class="btn btn-lg btn-light" href="myprofile.php">Sign up today</a></p>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -37,7 +41,11 @@
                     <div class="carousel-caption">
                         <h1>Review movies you've watched.</h1>
                         <p>Your unique take on movies helps others discover new favorites and sparks lively discussions.</p>
-                        <p><a class="btn btn-lg btn-light" href="reviews_page.php">Learn more</a></p>
+                        <?php if (!isset($_SESSION['user_id'])) { ?>
+                            <p><a class="btn btn-lg btn-light" href="user_page.php">Learn more</a></p>
+                        <?php } else { ?>
+                            <p><a class="btn btn-lg btn-light" href="reviews_page.php">Learn more</a></p>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -48,7 +56,11 @@
                     <div class="carousel-caption text-end">
                         <h1>Create unique lists.</h1>
                         <p>Create lists for any mood, theme, or cinematic adventure.</p>
-                        <p><a class="btn btn-lg btn-light" href="lists_page.php">Browse lists</a></p>
+                        <?php if (!isset($_SESSION['user_id'])) { ?>
+                            <p><a class="btn btn-lg btn-light" href="user_page.php">Browse films</a></p>
+                        <?php } else { ?>
+                            <p><a class="btn btn-lg btn-light" href="films_page.php">Browse films</a></p>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
