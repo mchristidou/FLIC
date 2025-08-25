@@ -91,7 +91,11 @@
                 <div class="m-3">
                     <h2>Reviews, Effortlessly</h2>
                     <p>Craft detailed reviews, assign star ratings, and document your personal connection to every film you experience.</p>
-                    <p><a class="btn btn-dark" href="reviews_page.php">Write a Review &raquo;</a></p>
+                    <?php if (!isset($_SESSION['user_id'])) { ?>
+                        <p><a class="btn btn-dark" href="user_page.php">Write a Review &raquo;</a></p>
+                    <?php } else { ?>
+                        <p><a class="btn btn-dark" href="reviews_page.php">Write a Review &raquo;</a></p>
+                    <?php } ?>
                 </div>
             </div>
 
@@ -101,7 +105,11 @@
                 <div class="m-3">
                     <h2>Find Your Next Watch</h2>
                     <p>Get inspired by trending titles, popular genres, and personalized recommendations curated just for you.</p>
-                    <p><a class="btn btn-dark" href="films_page.php">Discover Movies &raquo;</a></p>
+                    <?php if (!isset($_SESSION['user_id'])) { ?>
+                        <p><a class="btn btn-dark" href="user_page.php">Discover Movies &raquo;</a></p>
+                    <?php } else { ?>
+                        <p><a class="btn btn-dark" href="films_page.php">Discover Movies &raquo;</a></p>
+                    <?php } ?>
                 </div>
             </div>
 
@@ -112,7 +120,11 @@
                 <div class="m-3">
                     <h2>Organize Your Watchlist</h2>
                     <p>Keep track of movies you want to see, films you've loved, or even your guilty pleasures with custom lists.</p>
-                    <p><a class="btn btn-dark" href="lists_page.php">Create a List &raquo;</a></p>
+                    <?php if (!isset($_SESSION['user_id'])) { ?>
+                        <p><a class="btn btn-dark" href="user_page.php">Create a List &raquo;</a></p>
+                    <?php } else { ?>
+                        <p><a class="btn btn-dark" href="lists_page.php">Create a List &raquo;</a></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
