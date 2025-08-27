@@ -333,8 +333,8 @@
                         if ($query->rowCount() == 0) { ?>
                             <p class="text-center">No reviews found!</p>
                         <?php } $query->closeCursor();
-                        $query2->closeCursor();
-                        $query3->closeCursor();
+                        if (isset($query2)) { $query2->closeCursor(); }
+                        if (isset($query3)) { $query3->closeCursor(); }
                         $db = null; ?>
                     </div> 
                 </div>
