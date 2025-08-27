@@ -33,14 +33,6 @@
             $movies_query = $db->prepare($movies_sql);
             $movies_query->execute($params);
 
-            //reviews
-            $reviews_sql = "SELECT review_id, user_id, reviews.movie_id, title FROM reviews JOIN movies ON reviews.movie_id = movies.movie_id WHERE ";
-            $params = [];
-            $reviews_sql .= "title LIKE :search_value";
-            $params[':search_value'] = "%$search_value%";
-            $reviews_query = $db->prepare($reviews_sql);
-            $reviews_query->execute($params);
-
             //lists
             $lists_sql = "SELECT list_id, title FROM lists WHERE ";
             $params = [];
@@ -82,29 +74,6 @@
                         <?php echo $movies['title'].'<br/>'; ?> <!-- cards -->
                     </a>
                 <?php } 
-            } ?>
-
-            <br/>
-
-            <h3>Reviews</h3>           
-            <?php if ($reviews_query->rowCount() == 0) { ?>
-                <p>No results found</p>
-            <?php } else { 
-                while($reviews = $reviews_query->fetch()) {
-                    $user = $reviews['user_id'];
-                    $creator_sql = "SELECT username FROM users WHERE user_id = :user";
-                    $creator_query = $db->prepare($creator_sql);
-                    $creator_query->execute(array(':user'=>$user));
-                    $creator = $creator_query->fetch(); ?>
-
-                    <a href="open_review.php?review_id=<?php echo $reviews['review_id']; ?>&creator=<?php echo $creator['username']; ?>">
-                        <?php echo $reviews['title'].'<br/>';?> <!-- cards -->
-                    </a>
-
-                <?php } 
-                $creator_query->closeCursor();
-                $movies_query->closeCursor();
-                $reviews_query->closeCursor();
             } ?>
 
             <br/>
