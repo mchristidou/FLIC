@@ -35,7 +35,7 @@
         <?php $sql = "SELECT * FROM movies ORDER BY rating DESC LIMIT 4";
         $query = $db->prepare($sql);
         $query->execute(); ?>
-        <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
+        <div class="row row-cols-1 row-cols-md-4 g-4">
             <?php while ($record = $query->fetch()) { ?>
                 <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
                     <div class="col">
@@ -48,9 +48,9 @@
                         $movie_data = json_decode($response, true);
                         $poster = str_replace("SX300", "SX320", $movie_data['Poster']); ?>
                         <div class="poster-grid">
-                        <?php if (!empty($poster)) { ?>
-                            <img src="<?php echo $poster;?>" class="movie-poster poster-img" alt="...">
-                        <?php } ?>
+                            <?php if (!empty($poster)) { ?>
+                                <img src="<?php echo $poster;?>" class="movie-poster poster-img" alt="...">
+                            <?php } ?>
                         </div>
                     </div>
                     <?php $query2->closeCursor(); ?>
@@ -67,22 +67,22 @@
         <?php $sql = "SELECT * FROM movies WHERE genre = :genre";
         $query = $db->prepare($sql);
         $query->execute(array(':genre'=>$genre)); ?>
-        <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
+        <div class="row row-cols-1 row-cols-md-4 g-4">
             <?php while ($record = $query->fetch()) { ?>
                 <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
                     <div class="col">
-                        <div class="card">
-                            <?php $sql2 = "SELECT path FROM movie_posters WHERE movie_id = :movie_id";
-                            $query2 = $db->prepare($sql2);
-                            $query2->execute(array(':movie_id'=>$record['movie_id']));
-                            $results = $query2->fetch(); ?>
-                            <?php if (!empty($results['path'])) { ?>
-                                <img src="<?php echo $results['path'];?>" class="card-img-top" alt="...">
+                        <?php $sql2 = "SELECT imdb_id FROM movies WHERE movie_id = :movie_id";
+                        $query2 = $db->prepare($sql2);
+                        $query2->execute(array(':movie_id'=>$record['movie_id']));
+                        $results = $query2->fetch();
+                        $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $results['imdb_id'];
+                        $response = file_get_contents($url);
+                        $movie_data = json_decode($response, true);
+                        $poster = str_replace("SX300", "SX320", $movie_data['Poster']); ?>
+                        <div class="poster-grid">
+                            <?php if (!empty($poster)) { ?>
+                                <img src="<?php echo $poster;?>" class="movie-poster poster-img" alt="...">
                             <?php } ?>
-                            <div class="card-body">
-                                    <h5 class="card-title"><?php echo $record['title'] ?></h5>
-                                    <p class="card-text">Genre: <?php echo $record['genre'] ?></p>
-                            </div>
                         </div>
                     </div>
                     <?php $query2->closeCursor(); ?>
@@ -97,22 +97,22 @@
         <div style="margin:20px 20px">
         <h3>Other movies...</h3>
 
-        <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
+        <div class="row row-cols-1 row-cols-md-4 g-4">
             <?php while ($record = $query->fetch()) { ?>
                 <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
                     <div class="col">
-                        <div class="card">
-                            <?php $poster_sql = "SELECT path FROM movie_posters WHERE movie_id = :movie_id";
-                            $poster_query = $db->prepare($poster_sql);
-                            $poster_query->execute(array(':movie_id'=>$record['movie_id']));
-                            $results = $poster_query->fetch(); ?>
-                            <?php if (!empty($results['path'])) { ?>
-                                <img src="<?php echo $results['path'];?>" class="card-img-top" alt="...">
-                            <?php } $poster_query->closeCursor(); ?>
-                            <div class="card-body">
-                                    <h5 class="card-title"><?php echo $record['title'] ?></h5>
-                                    <p class="card-text">Genre: <?php echo $record['genre'] ?></p>
-                            </div>
+                        <?php $poster_sql = "SELECT imdb_id FROM movies WHERE movie_id = :movie_id";
+                        $poster_query = $db->prepare($poster_sql);
+                        $poster_query->execute(array(':movie_id'=>$record['movie_id']));
+                        $results = $poster_query->fetch();
+                        $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $results['imdb_id'];
+                        $response = file_get_contents($url);
+                        $movie_data = json_decode($response, true);
+                        $poster = str_replace("SX300", "SX320", $movie_data['Poster']); ?>
+                        <div class="poster-grid">
+                            <?php if (!empty($poster)) { ?>
+                                <img src="<?php echo $poster;?>" class="movie-poster poster-img" alt="...">
+                            <?php } ?>
                         </div>
                     </div>
                 </a>  
