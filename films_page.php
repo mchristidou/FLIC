@@ -9,6 +9,8 @@
     require('nav.php');
     require('functions.php');
 
+    $apiKey = "a42405df"; //OMDB API key
+
 ?>
 
 <main id="main" class="flex-grow-1">
@@ -28,27 +30,27 @@
 
     <!-- Top Movies -->
     <div style="margin:20px 20px">
-        <h3>Top Movies</h3>
+        <h3>Top Rated Movies</h3>
 
-        <?php $sql = "SELECT * FROM movies  ORDER BY rating DESC LIMIT 4";
+        <?php $sql = "SELECT * FROM movies ORDER BY rating DESC LIMIT 4";
         $query = $db->prepare($sql);
         $query->execute(); ?>
         <div class="row row-cols-1 row-cols-md-4 g-4"> <!--FIX SIZE, MAKE RESPONSIVE -->
             <?php while ($record = $query->fetch()) { ?>
                 <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
                     <div class="col">
-                        <div class="card">
-                            <?php $sql2 = "SELECT path FROM movie_posters WHERE movie_id = :movie_id";
-                            $query2 = $db->prepare($sql2);
-                            $query2->execute(array(':movie_id'=>$record['movie_id']));
-                            $results = $query2->fetch(); ?>
-                            <?php if (!empty($results['path'])) { ?>
-                                <img src="<?php echo $results['path'];?>" class="card-img-top" alt="...">
-                            <?php } ?>
-                            <div class="card-body">
-                                    <h5 class="card-title"><?php echo $record['title'] ?></h5>
-                                    <p class="card-text">Genre: <?php echo $record['genre'] ?></p>
-                            </div>
+                        <?php $sql2 = "SELECT imdb_id FROM movies WHERE movie_id = :movie_id";
+                        $query2 = $db->prepare($sql2);
+                        $query2->execute(array(':movie_id'=>$record['movie_id']));
+                        $results = $query2->fetch();
+                        $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $results['imdb_id'];
+                        $response = file_get_contents($url);
+                        $movie_data = json_decode($response, true);
+                        $poster = str_replace("SX300", "SX320", $movie_data['Poster']); ?>
+                        <div class="poster-grid">
+                        <?php if (!empty($poster)) { ?>
+                            <img src="<?php echo $poster;?>" class="movie-poster poster-img" alt="...">
+                        <?php } ?>
                         </div>
                     </div>
                     <?php $query2->closeCursor(); ?>
