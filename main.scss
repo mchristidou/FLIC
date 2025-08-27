@@ -150,14 +150,31 @@ $enable-shadows: true;
 .movie-poster {
     width: 100%;      
     height: 100%;
-    border-radius: 8px;            /* smooth corners */
+    border-radius: 8px;                       /* smooth corners */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease,         /* smoother zoom */
+                box-shadow 0.4s ease,
+                filter 0.4s ease;
+}
+
+.movie-poster:hover {
+    transform: scale(1.02);                /* little zoom effect */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    filter: brightness(1.1);
+}
+
+.mini-poster {
+    width: 15%;  
+    height: auto;
+    border-radius: 8px;                  /* smooth corners */
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     transition: transform 0.4s ease,    /* smoother zoom */
                 box-shadow 0.4s ease,
                 filter 0.4s ease;
 }
-.movie-poster:hover {
-    transform: scale(1.02); /* little zoom effect */
+
+.mini-poster:hover {
+    transform: scale(1.02);            /* little zoom effect */
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     filter: brightness(1.1);
 }
