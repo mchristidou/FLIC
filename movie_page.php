@@ -11,28 +11,26 @@
 
     $apiKey = "a42405df"; //OMDB API key
 
+    $movie_id = $_GET['movie_id'];
+    $sql = "SELECT * FROM movies WHERE movie_id = :movie_id";
+    $query = $db->prepare($sql);
+    $query->execute(array(':movie_id'=>$movie_id));
+    $record = $query->fetch(); 
+    
+    $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $record['imdb_id'];
+    $response = file_get_contents($url);
+    $movie_data = json_decode($response, true);
+
 ?>
 
 <main id="main" class="flex-grow-1">
-    <div class="container" style="margin-top:10px; padding:15px; display: flex; align-items: flex-start;">
-        <div class="row">
-            <div class="col-16">
-            
-                <?php $movie_id = $_GET['movie_id'];
-                $sql = "SELECT * FROM movies WHERE movie_id = :movie_id";
-                $query = $db->prepare($sql);
-                $query->execute(array(':movie_id'=>$movie_id));
-                $record = $query->fetch(); 
-                
-                $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $record['imdb_id'];
-                $response = file_get_contents($url);
-                $movie_data = json_decode($response, true); ?>
-
-                <div class="col-4">
-                    <img src="<?php echo $movie_data['Poster']?>" class="poster img-fluid float-md-start me-md-3 mb-3 rounded shadow" 
-                    alt="Movie Poster">
-                </div>
-
+    <div class="container my-5">
+        <div class="row g-4 align-items-start">
+            <div class="col-12 col-md-4">
+                <img src="<?php echo $movie_data['Poster']?>" class="poster img-fluid float-md-start rounded shadow" 
+                alt="Movie Poster">
+            </div>
+            <div class="col-12 col-sm-8">
                 <div>
                     <h1>
                         <?php echo $record['title']; ?>
@@ -54,8 +52,13 @@
                 <?php echo_msg() ?> 
                 <?php $query->closeCursor(); ?>
 
-                <button name="submit" type="submit" id="submit" class="btn btn-dark" 
-                data-bs-toggle="modal" data-bs-target="#addmovie" >Add to list</button>
+                <div class="mb-3 d-flex flex-wrap gap-2">
+                    <button name="submit" type="submit" id="submit" class="btn btn-dark" 
+                    data-bs-toggle="modal" data-bs-target="#addmovie" >Add to list</button>
+
+                    <button name="submit" type="submit" id="submit" class="btn btn-dark" 
+                    data-bs-toggle="modal" data-bs-target="#reviewmovie" >Review</button>
+                </div>
 
                 <div class="modal fade" id="addmovie" tabindex="-1" aria-labelledby="addmovieLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -89,9 +92,6 @@
                         </div>
                     </div>
                 </div>
-
-                <button name="submit" type="submit" id="submit" class="btn btn-dark" 
-                data-bs-toggle="modal" data-bs-target="#reviewmovie" >Review</button>
 
                 <div class="modal fade" id="reviewmovie" tabindex="-1" aria-labelledby="reviewmovieLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -157,7 +157,7 @@
                 <h3 class="mb-3">More Info</h3>
                 
                 <div class="row g-3">
-                    <div class="col-md-3">
+                    <div class="col-6 col-md-3">
                         <div class="card text-center shadow-sm p-2 h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Box Office</h5>
@@ -165,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-6 col-md-3">
                         <div class="card text-center shadow-sm p-2 h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Awards</h5>
@@ -173,7 +173,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-6 col-md-3">
                         <div class="card text-center shadow-sm p-2 h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Country</h5>
@@ -181,7 +181,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-6 col-md-3">
                         <div class="card text-center shadow-sm p-2 h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Language</h5>
