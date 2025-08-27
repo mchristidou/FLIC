@@ -9,26 +9,29 @@
     require('nav.php');
     require('functions.php');
 
-    $response = file_get_contents('http://www.omdbapi.com/?apikey=a42405df&i=tt1856101'); // Example movie ID - Blade Runner 2049
-    $movie_data = json_decode($response, true);
-    
+    $apiKey = "a42405df"; //OMDB API key
+
 ?>
 
 <main id="main" class="flex-grow-1">
     <div class="container" style="margin-top:10px; padding:15px; display: flex; align-items: flex-start;">
         <div class="row">
             <div class="col-16">
-
-                <div class="col-4">
-                    <img src="movie_posters/bladerunner_mp.jpg" class="poster img-fluid float-md-start me-md-3 mb-3 rounded shadow" 
-                    alt="Movie Poster">
-                </div>
             
                 <?php $movie_id = $_GET['movie_id'];
                 $sql = "SELECT * FROM movies WHERE movie_id = :movie_id";
                 $query = $db->prepare($sql);
                 $query->execute(array(':movie_id'=>$movie_id));
-                $record = $query->fetch(); ?>
+                $record = $query->fetch(); 
+                
+                $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $record['imdb_id'];
+                $response = file_get_contents($url);
+                $movie_data = json_decode($response, true); ?>
+
+                <div class="col-4">
+                    <img src="<?php echo $movie_data['Poster']?>" class="poster img-fluid float-md-start me-md-3 mb-3 rounded shadow" 
+                    alt="Movie Poster">
+                </div>
 
                 <div>
                     <h1>
