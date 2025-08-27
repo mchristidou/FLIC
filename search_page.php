@@ -9,6 +9,8 @@
     require('nav.php');
     require('functions.php');
 
+    $apiKey = "a42405df"; //OMDB API key
+
     $search_value = $_GET['search_value'];
 
     if (isset($_GET['search_value'])) { // if the search button is clicked
@@ -26,7 +28,7 @@
             $query->execute($params);
 
             //movies
-            $movies_sql = "SELECT movie_id, title FROM movies WHERE ";
+            $movies_sql = "SELECT movie_id, title, imdb_id FROM movies WHERE ";
             $params = [];
             $movies_sql .= "title LIKE :search_value";
             $params[':search_value'] = "%$search_value%";
@@ -51,17 +53,51 @@
 
         <?php echo_msg(); ?>
 
-        <h3>Users</h3>
-        <?php if (!empty($input)) { 
-            if ($query->rowCount() == 0) { ?>
+
+        <?php if (!empty($input)) { ?>
+
+            <h3>Users</h3>
+            <?php if ($query->rowCount() == 0) { ?>
                 <p>No results found</p>
             <?php } else { 
                 while($users = $query->fetch()) { ?>
-                    <a href="public_profile.php?search_value=<?php echo $users['username']; ?>&user_id=<?php echo $users['user_id']; ?>">
-                        <?php echo $users['username'].'<br/>';?>
+                    <a style="text-decoration:none;" href="public_profile.php?search_value=<?php echo $users['username']; ?>&user_id=<?php echo $users['user_id']; ?>">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <img src="avatars/avatar<?php echo $users['user_id']; ?>.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                        &nbsp;
+                                        <?php echo $users['username'];?><br/>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div> 
                     </a>
                 <?php } 
             } $query->closeCursor(); ?>
+
+            <br/>
+
+
+            <h3>Lists</h3>           
+            <?php if ($lists_query->rowCount() == 0) { ?>
+                <p>No results found</p>
+            <?php } else { 
+                while($lists = $lists_query->fetch()) { ?>
+                    <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $lists['list_id'];?>">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $lists['title'] ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php }
+            }
+            
+            $lists_query->closeCursor(); ?>
 
             <br/>
 
@@ -71,25 +107,18 @@
             <?php } else { 
                 while($movies = $movies_query->fetch()) { ?>
                     <a href="movie_page.php?search_value=<?php echo $movies['title']; ?>&movie_id=<?php echo $movies['movie_id']; ?>">
-                        <?php echo $movies['title'].'<br/>'; ?> <!-- cards -->
+                        <?php $url = "http://www.omdbapi.com/?apikey=" . $apiKey . "&i=" . $movies['imdb_id'];
+                        $response = file_get_contents($url);
+                        $movie_data = json_decode($response, true); ?>
+                        <div class="poster-grid">
+                            <?php if (!empty($movie_data['Poster'])) { ?>
+                                <img src="<?php echo $movie_data['Poster'];?>" class="mini-poster poster-img" alt="<?php echo $movie_data['Title'];?>">
+                            <?php } ?>
+                        </div>
                     </a>
                 <?php } 
-            } ?>
-
-            <br/>
-
-            <h3>Lists</h3>           
-            <?php if ($lists_query->rowCount() == 0) { ?>
-                <p>No results found</p>
-            <?php } else { 
-                while($lists = $lists_query->fetch()) { ?>
-                    <a href="open_list.php?list_id=<?php echo $lists['list_id']; ?>">
-                        <?php echo $lists['title'].'<br/>';?> <!-- cards -->
-                    </a>
-                <?php }
             }
-            
-            $lists_query->closeCursor();
+            $movies_query->closeCursor();
             $db = null;
 
         } else { ?>
