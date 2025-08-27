@@ -19,7 +19,7 @@
     <span class="border">
         <div class="container">
             <div class="row">
-                <div class="col-8">
+                <div class="col-12 col-md-6">
 
                     <!-- Display message if any -->
                     <?php echo_msg() ?>
@@ -111,7 +111,7 @@
                         $query->closeCursor(); ?>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-6">
                     <h2>Friend Lists</h2>
 
                     <hr>
