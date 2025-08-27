@@ -381,7 +381,8 @@
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); ?>
                     <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
-                        <?php while ($record = $query->fetch()) { ?>
+                        <?php while ($record = $query->fetch()) {
+                            $has_friends = true; ?>
                             <a style="text-decoration:none;" href="public_profile.php?search_value=<?php echo $record['username']; ?>&user_id=<?php echo $record['user_id']; ?>">
                                 <div class="col">
                                     <div class="card">
@@ -395,8 +396,14 @@
                                     </div>
                                 </div> 
                             </a>
-                        <?php } $query->closeCursor(); ?>
+                        <?php } ?>
                     </div>
+                    <div class="text-center">
+                        <?php if (!$has_reviews) {
+                            echo 'No friends found.';
+                        } ?>
+                    </div> 
+                    <?php $query->closeCursor(); ?>
                 </div>
             </div>
         </div>

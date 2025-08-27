@@ -302,12 +302,13 @@
                         echo 'No liked reviews found.';
                     } ?>
                 </div>
+
                 <?php $query->closeCursor(); ?>
 
             </div>
         </div>
 
-        <div class="tab-pane fade" id="friends"> <!--needs to be fixed-->
+        <div class="tab-pane fade" id="friends">
             <!-- Display friends of the user -->
             <div class="row m-1 p-10">
                 <div style="overflow-y: auto; max-height: 160px;">
@@ -315,7 +316,8 @@
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); ?>
                     <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
-                        <?php while ($record = $query->fetch()) { ?>
+                        <?php while ($record = $query->fetch()) {
+                            $has_friends = true; ?>
                             <a style="text-decoration:none;" href="public_profile.php?search_value=<?php echo $record['username']; ?>&user_id=<?php echo $record['user_id']; ?>">
                                 <div class="col">
                                     <div class="card">
@@ -330,6 +332,12 @@
                                 </div> 
                             </a>
                         <?php } $query->closeCursor(); ?>
+                    </div>
+                    
+                    <div class="ms-1 text-center">
+                        <?php if (!$has_friends) {
+                            echo 'No friends found.';
+                        } ?>
                     </div>
                 </div>
             </div>
