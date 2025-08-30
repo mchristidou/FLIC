@@ -6,14 +6,14 @@
     $current_user = $_SESSION['user_id']; //user_id of the currently logged in user
     $search_value = $_GET['search_value'];
     $user_id = $_GET['user_id']; //user_id of the profile being viewed
-    $avatar = $_SESSION['avatar'];
     
-    //get username of the profile being viewed
-    $sql = "SELECT username FROM users WHERE user_id = :id;";
+    //get username and avatar of the profile being viewed
+    $sql = "SELECT username, avatar FROM users WHERE user_id = :id;";
     $query = $db->prepare($sql);
     $query->execute(array(':id'=>$user_id));
     $res = $query->fetch();
     $username = $res['username'];
+    $avatar = $res['avatar'];
     $query->closeCursor();
 
     $title = "FLIC - Film Lovers Interacting & Connecting";
@@ -312,7 +312,7 @@
             <!-- Display friends of the user -->
             <div class="row m-1 p-10">
                 <div style="overflow-y: auto; max-height: 160px;">
-                    <?php $sql = "SELECT user_id, username FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
+                    <?php $sql = "SELECT user_id, username, avatar FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); ?>
                     <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
@@ -323,7 +323,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">
-                                                <img src="avatars/avatar<?php echo $record['user_id']; ?>.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                                <img src="avatars/<?php echo $record['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
                                                 &nbsp;
                                                 <?php echo $record['username'];?><br/>
                                             </h5>
