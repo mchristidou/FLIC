@@ -19,10 +19,9 @@
     <span class="border">
         <div class="container">
             <div class="row">
+                <!-- Display message if any -->
+                <?php echo_msg() ?>
                 <div class="col-12 col-md-6">
-
-                    <!-- Display message if any -->
-                    <?php echo_msg() ?>
 
                     <h2>
                         My Lists

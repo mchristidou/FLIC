@@ -31,12 +31,14 @@
                     <hr>
 
                     <?php $user_id = $_SESSION['user_id'];
-                    $sql = "SELECT * FROM lists JOIN friends ON lists.user_id = friends.user_id1 
+                    $sql = "SELECT * FROM lists JOIN friends ON lists.user_id = friends.user_id2 
                     JOIN users ON lists.user_id = users.user_id
-                    WHERE user_id2 = :user_id";
+                    WHERE user_id1 = :user_id";
                     $query = $db->prepare($sql);
-                    $query->execute(array(':user_id'=>$user_id)); 
-                    while ($record = $query->fetch()) { ?>
+                    $query->execute(array(':user_id'=>$user_id));
+                    $has_lists = false; 
+                    while ($record = $query->fetch()) {
+                        $has_lists = true; ?>
                         <div class="card mt-3">
                             <div class="card-body">
                                 <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
@@ -46,8 +48,13 @@
                             </div>
                         </div>
                         </br>
-                        <?php } 
-                        $query->closeCursor(); ?>
+                        <?php } ?>
+                        <div class="ms-1 text-center">
+                            <?php if (!$has_lists) {
+                                echo 'No lists found.';
+                            } ?>
+                        </div>
+                        <?php $query->closeCursor(); ?>
                 </div>    
 
                 <div class="col-6"> <!--OPENED LIST IN THE CENTER -->
