@@ -377,7 +377,7 @@
             <!-- Display friends of the user -->
             <div class="row m-1 p-10">
                 <div style="overflow-y: auto; max-height: 160px;">
-                    <?php $sql = "SELECT user_id, username FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
+                    <?php $sql = "SELECT user_id, username, avatar FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); ?>
                     <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
@@ -388,7 +388,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">
-                                                <img src="avatars/avatar<?php echo $record['user_id']; ?>.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                                <img src="avatars/<?php echo $record['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
                                                 &nbsp;
                                                 <?php echo $record['username'];?><br/>
                                             </h5>
@@ -399,7 +399,7 @@
                         <?php } ?>
                     </div>
                     <div class="text-center">
-                        <?php if (!$has_reviews) {
+                        <?php if (!$has_friends) {
                             echo 'No friends found.';
                         } ?>
                     </div> 
