@@ -389,8 +389,11 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">
-                                                <img src="avatars/<?php echo $record['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
-                                                &nbsp;
+                                                <?php if (isset($record['avatar'])) { ?>
+                                                    <img src="avatars/<?php echo $record['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                                <?php } else { ?>
+                                                    <img src="profile.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                                <?php } ?>
                                                 <?php echo $record['username'];?><br/>
                                             </h5>
                                         </div>
