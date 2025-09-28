@@ -22,10 +22,10 @@
         if ($result == true && password_verify($_POST['password'], $hash)) {   //found in db
             $authorised= true;  
             session_start();    // session for user starts
-            $_SESSION['username']= $result['username'];  //we record the user in session
+            $_SESSION['username']= $result['username'];
             $_SESSION['user_id']= $result['user_id'];
-            $_SESSION['fave_genre'] = $result['fave_genre']; //is ti good?
-            $_SESSION['avatar'] = $result['avatar']; //is it good?
+            $_SESSION['fave_genre'] = $result['fave_genre'];
+            $_SESSION['avatar'] = $result['avatar'];
         }
       
         if ($authorised==true) {  
