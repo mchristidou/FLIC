@@ -82,8 +82,13 @@
                                         </div>
                                         <input type="hidden" id="movie_id" name="movie_id" value="<?php echo $record['movie_id']; ?>">
                                 <?php }
+                                if ($result == 0) { ?>
+                                    <p style="margin:10px;text-align:center;">No lists available.</p>
+                                <?php }
                                 $query->closeCursor();
                                 $db = null; ?>
+                                </br>
+                                <a href="lists_page.php" style="text-decoration:none;">Create a new list</a>
                             </div>
                             <div class="modal-footer">
                                         <button type="submit" class="btn btn-dark">Add</button>
