@@ -311,7 +311,7 @@
         <div class="tab-pane fade" id="friends">
             <!-- Display friends of the user -->
             <div class="row m-1 p-10">
-                <div style="overflow-y: auto; max-height: 160px;">
+                <div style="overflow-y: auto;">
                     <?php $sql = "SELECT user_id, username, avatar FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
                     $query = $db->prepare($sql);
                     $query->execute(array(':user_id'=>$user_id)); ?>
