@@ -9,8 +9,6 @@
     require('nav.php');
     require('functions.php');
 
-    $apiKey = "a42405df"; //OMDB API key
-
     $user_id = $_SESSION['user_id'];
 
     $sql = "SELECT * FROM users JOIN genres ON genres_id = fave_genre WHERE user_id = :user_id";

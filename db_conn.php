@@ -11,4 +11,6 @@
         echo "Can't connect to the database";
     }
 
+    $apiKey = "a42405df"; //OMDB API key
+
 ?>
