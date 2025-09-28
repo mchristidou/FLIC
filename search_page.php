@@ -12,6 +12,7 @@
     $apiKey = "a42405df"; //OMDB API key
 
     $search_value = $_GET['search_value'];
+    $current_user = $_SESSION['username'];
 
     if (isset($_GET['search_value'])) { // if the search button is clicked
 
@@ -22,8 +23,9 @@
             //users
             $sql = "SELECT user_id, username, avatar FROM users WHERE ";
             $params = [];
-            $sql .= "username LIKE :search_value";
+            $sql .= "username LIKE :search_value AND username != :current_user";
             $params[':search_value'] = "%$search_value%";
+            $params[':current_user'] = $current_user;
             $query = $db->prepare($sql);
             $query->execute($params);
 
@@ -36,10 +38,11 @@
             $movies_query->execute($params);
 
             //lists
-            $lists_sql = "SELECT list_id, title FROM lists WHERE ";
+            $lists_sql = "SELECT list_id, title, user_id FROM lists WHERE ";
             $params = [];
-            $lists_sql .= "title LIKE :search_value";
+            $lists_sql .= "title LIKE :search_value AND user_id != (SELECT user_id FROM users WHERE username = :current_user)";
             $params[':search_value'] = "%$search_value%";
+            $params[':current_user'] = $current_user;
             $lists_query = $db->prepare($lists_sql);
             $lists_query->execute($params);
         } 
@@ -88,19 +91,21 @@
             <h3>Lists</h3>           
             <?php if ($lists_query->rowCount() == 0) { ?>
                 <p>No results found</p>
-            <?php } else { 
-                while($lists = $lists_query->fetch()) { ?>
-                    <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $lists['list_id'];?>">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo $lists['title'] ?></h5>
+            <?php } else { ?>
+                <div class="row row-cols-1 row-cols-md-4 g-2">
+                    <?php while($lists = $lists_query->fetch()) { ?>
+                        <a style="text-decoration:none;" href="open_list.php?list_id=<?php echo $lists['list_id'];?>">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo $lists['title'] ?></h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                <?php }
-            }
+                        </a>
+                    <?php } ?>
+                </div>
+            <?php }
             
             $lists_query->closeCursor(); ?>
 
