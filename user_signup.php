@@ -40,10 +40,10 @@
         exit();
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: signup.php?msg=Μη αποδεκτό email!");
-        exit();
-    } /*not sure if needed*/
+    #if (!looks_like_email($email)) {
+       # header("Location: signup.php?msg=Μη αποδεκτό email!");
+       # exit();
+    #} /*not sure if needed*/
 
     $hash = password_hash($password, PASSWORD_DEFAULT); //applying cryptographic salt to password
 
