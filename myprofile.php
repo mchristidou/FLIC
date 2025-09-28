@@ -441,7 +441,7 @@
                     <div class="col">
                         <p class="m-2">Password</p>
                         <div class="input-group mb-3">
-                            <input type="password" id="password" name="password" value="" class="form-control" maxlength="25">
+                            <input type="password" id="password" name="password" autocomplete="off" value="" class="form-control" maxlength="25">
                         </div>
                         <p class="m-2">Confirm Password</p>
                         <div class="input-group mb-3">
@@ -451,27 +451,29 @@
                     </div>
                     <div class="col">
                         <p class="m-2">Favourite Genre</p>
-                        <div class="input-group mb-3">
-                            <!--option-->
-                            <?php $fave_genre = $record['fave_genre'];
-                            $genres = "SELECT name FROM genres WHERE genres_id = :fave_genre";
-                            $q = $db->prepare($genres);
-                            $q->execute(array(':fave_genre'=>$fave_genre));
-                            $fave = $q->fetch(); 
-                            $q->closeCursor(); ?>
-                            <select class="form-select" id="fave_genre" name="fave_genre">
-                                <option value="-1" selected="selected">-- <?php echo $fave['name']; ?> --</option>
-                                <?php $genres = "SELECT genres_id, name FROM genres";
+                        <form action="edit_fave_genre.php" method="post">
+                            <div class="input-group mb-3">
+                                <!--option-->
+                                <?php $fave_genre = $record['fave_genre'];
+                                $genres = "SELECT name FROM genres WHERE genres_id = :fave_genre";
                                 $q = $db->prepare($genres);
-                                $q->execute(); 
-                                while ($result = $q->fetch()) { ?> 
-                                <option value="<?php echo $result['genres_id'] ?>">
-                                    <?php echo $result['name']; ?>
-                                </option>
-                                <?php } $q->closeCursor(); ?>
-                            </select>
-                            <button class="btn btn-dark">Change</button>
-                        </div>
+                                $q->execute(array(':fave_genre'=>$fave_genre));
+                                $fave = $q->fetch(); 
+                                $q->closeCursor(); ?>
+                                <select class="form-select" id="fave_genre" name="fave_genre">
+                                    <option value="-1" selected="selected">-- <?php echo $fave['name']; ?> --</option>
+                                    <?php $genres = "SELECT genres_id, name FROM genres";
+                                    $q = $db->prepare($genres);
+                                    $q->execute(); 
+                                    while ($result = $q->fetch()) { ?> 
+                                        <option value="<?php echo $result['genres_id'] ?>">
+                                            <?php echo $result['name']; ?>
+                                        </option>
+                                    <?php } $q->closeCursor(); ?>
+                                </select>
+                                <button class="btn btn-dark">Change</button>
+                            </div>
+                        </form>
                     </div>
                     <?php $query->closeCursor();
                     $db = null; ?>

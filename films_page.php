@@ -11,6 +11,15 @@
 
     $apiKey = "a42405df"; //OMDB API key
 
+    $user_id = $_SESSION['user_id'];
+
+    $sql = "SELECT * FROM users JOIN genres ON genres_id = fave_genre WHERE user_id = :user_id";
+    $query = $db->prepare($sql);
+    $query->execute(array(':user_id' => $user_id));
+    $result = $query->fetch();
+    $fave_genre = $result['name'];
+    $query->closeCursor();
+
 ?>
 
 <main id="main" class="flex-grow-1">
@@ -19,14 +28,6 @@
     </div>
 
     <?php echo_msg(); ?>
-    
-    <?php $fave_genre = $_SESSION['fave_genre'];
-    $user_id = $_SESSION['user_id'];
-    $sql = "SELECT * FROM users JOIN genres WHERE genres_id= :fave_genre AND user_id = :user_id";
-    $query = $db->prepare($sql);
-    $query->execute(array(':user_id' => $user_id, ':fave_genre' => $fave_genre));
-    $result = $query->fetch();
-    $genre = $result['name']; ?>
 
     <!-- Top Movies -->
     <div style="margin:20px 20px">
@@ -66,7 +67,7 @@
 
         <?php $sql = "SELECT * FROM movies WHERE genre = :genre";
         $query = $db->prepare($sql);
-        $query->execute(array(':genre'=>$genre)); ?>
+        $query->execute(array(':genre'=>$fave_genre)); ?>
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <?php while ($record = $query->fetch()) { ?>
                 <a href="movie_page.php?movie_id=<?php echo $record['movie_id']; ?>" style="text-decoration:none;">
