@@ -9,6 +9,7 @@
 
     $user_id = $_SESSION['user_id'];
     $new_username = $_POST['username'];
+    $_SESSION['username'] = $new_username;
 
     $sql = "UPDATE users 
     SET username = :new_username 
@@ -20,7 +21,7 @@
     $db = null;
 
     if ($result > 0) {
-        header("Location: myprofile.php?msg=Το username άλλαξε επιτυχώς!Για να το δεις, ξανακάνε login!");
+        header("Location: myprofile.php?msg=Το username άλλαξε επιτυχώς!");
         exit();
     } else {
         header("Location: myprofile.php?msg=Αποτυχία Αλλαγής!");
