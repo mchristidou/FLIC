@@ -140,7 +140,7 @@
             </div>
             
             <div class="row g-4 mt-4">
-                <!--empty-->
+                
                 <h2>More Reviews</h2>
 
                 <hr>

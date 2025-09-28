@@ -6,7 +6,7 @@
     
     $title = "FLIC - Film Lovers Interacting & Connecting";
 
-    require('header.php'); //not needed?
+    require('header.php');
     require('nav.php');
     require('functions.php');
 

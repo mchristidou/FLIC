@@ -11,7 +11,7 @@ function looks_like_email(str) {
     
     if (dotPosAfterAmpersat-ampersatPos==1) result = false; 
     
-    if ( str.indexOf(".")==0  ||  str.lastIndexOf(".")==str.length-1 ) result = false; 
+    if ( str.indexOf(".")==0  ||  str.lastIndexOf(".")==str.length-1 ) result = false;
     
     return result;
 }
@@ -190,9 +190,7 @@ function initOtherMoviesAjaxLoader() {
 document.addEventListener('DOMContentLoaded', initOtherMoviesAjaxLoader);
 
 // ----------------------------- AJAX LIVE SEARCH -------------------------------//
-// This function is called when the user types in the search box
-// It sends an AJAX request to the server to get matching movie titles
-// and displays them in a dropdown list
+// This function is called when the user types in the search box (review modal)
 function showResult(str) {
     if (str.length == 0) {
         document.getElementById("livesearch").innerHTML = "";
