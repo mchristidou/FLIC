@@ -59,28 +59,31 @@
             <h3>Users</h3>
             <?php if ($query->rowCount() == 0) { ?>
                 <p>No results found</p>
-            <?php } else { 
-                while($users = $query->fetch()) { ?>
-                    <div class="row row-cols-1 row-cols-md-4 g-2">
+            <?php } else { ?>
+                <div class="row row-cols-1 row-cols-md-4 g-2">
+                    <?php while($users = $query->fetch()) { ?>
                         <a style="text-decoration:none;" href="public_profile.php?search_value=<?php echo $users['username']; ?>&user_id=<?php echo $users['user_id']; ?>">
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <img src="avatars/<?php echo $users['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                            <?php if (isset($users['avatar'])) { ?>
+                                                <img src="avatars/<?php echo $users['avatar']; ?>" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                            <?php } else { ?>
+                                                <img src="profile.jpg" class="rounded-circle" width="45" height="45" alt="Avatar">
+                                            <?php } ?>
                                             &nbsp;
-                                            <?php echo $users['username'];?><br/>
+                                            <?php echo $users['username'];?>
                                         </h5>
                                     </div>
                                 </div>
                             </div> 
                         </a>
-                    </div>
-                <?php } 
-            } $query->closeCursor(); ?>
+                    <?php } ?>
+                </div>
+            <?php } $query->closeCursor(); ?>
 
             <br/>
-
 
             <h3>Lists</h3>           
             <?php if ($lists_query->rowCount() == 0) { ?>
