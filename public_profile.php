@@ -314,7 +314,8 @@
                 <div style="overflow-y: auto;">
                     <?php $sql = "SELECT user_id, username, avatar FROM users JOIN friends ON user_id=user_id2 WHERE user_id1 = :user_id;";
                     $query = $db->prepare($sql);
-                    $query->execute(array(':user_id'=>$user_id)); ?>
+                    $query->execute(array(':user_id'=>$user_id)); 
+                    $has_friends = false; ?>
                     <div class="row row-cols-1 row-cols-md-4 g-2 p-3">
                         <?php while ($record = $query->fetch()) {
                             $has_friends = true; ?>
