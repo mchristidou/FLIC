@@ -79,7 +79,7 @@
     </div>
 
     <div class="container container-expand-sm text-center" style="padding:15px; width:200;">
-        <?php echo_msg(); ?>
+        <?php //echo_msg(); ?>
     </div>
 
     <div class="container headings">
