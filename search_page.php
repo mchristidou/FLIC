@@ -32,8 +32,8 @@
             //movies
             $movies_sql = "SELECT movie_id, title, imdb_id FROM movies WHERE ";
             $params = [];
-            $movies_sql .= "title LIKE :search_value";
-            $params[':search_value'] = "%$search_value%";
+            $movies_sql .= "title LIKE :search_value ORDER BY (title LIKE ':search_value') DESC, title";
+            $params[':search_value'] = "$search_value%";
             $movies_query = $db->prepare($movies_sql);
             $movies_query->execute($params);
 
@@ -115,7 +115,7 @@
             <?php if ($movies_query->rowCount() == 0) { ?>
                 <p>No results found</p>
             <?php } else { ?>
-                <div class="row row-cols-1 row-cols-md-4">
+                <div class="row row-cols-1 row-cols-md-4 p-2 g-2">
                     <?php while($movies = $movies_query->fetch()) { ?>
                         <div class="col">
                             <a href="movie_page.php?search_value=<?php echo $movies['title']; ?>&movie_id=<?php echo $movies['movie_id']; ?>">
