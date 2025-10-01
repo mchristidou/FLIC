@@ -1,40 +1,28 @@
-function looks_like_email(str) {
-    var result=true;
-                    
-    var ampersatPos = str.indexOf("@");    
-    var dotPos = str.indexOf(".");         
-    var dotPosAfterAmpersat = str.indexOf(".", ampersatPos); 
-    
-    if (ampersatPos<=0) result = false; 
-    
-    if (dotPos<0) result = false; 
-    
-    if (dotPosAfterAmpersat-ampersatPos==1) result = false; 
-    
-    if ( str.indexOf(".")==0  ||  str.lastIndexOf(".")==str.length-1 ) result = false;
-    
-    return result;
-}
-
 function validate_form() { //validates sign up form
     var result=true;
 
     var errorMessage = '';
 
-    var email=document.getElementById("email").value;
-    if ( !looks_like_email(email) ) {
-        result=false;
-        errorMessage = errorMessage + "Το email δεν είναι αποδεκτό!\n";
-    } 
+    var email=document.getElementById("signupEmail").value;
+      // Simple but solid regex for emails
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    var email_conf=document.getElementById("email_conf").value;
+    if (email === '') {
+      result = false;
+      errorMessage += "Δεν δώσατε email!\n";
+    } else if (!regex.test(email)) {
+      result = false;
+      errorMessage += "Το email δεν είναι έγκυρο!\n";
+    }
+
+    var email_conf=document.getElementById("signupEmailconf").value;
     if (email_conf!=email){
         result=false;
         errorMessage = errorMessage + "To email δεν είναι επαληθεύεται!\n";
     }
     
     var birthday = new Date();
-    birthday = document.getElementById("birthday").valueAsDate;
+    birthday = document.getElementById("bday").valueAsDate;
     var d1 = new Date(2008,1,1);
     if (!birthday) {
       result = false;
@@ -44,7 +32,7 @@ function validate_form() { //validates sign up form
       errorMessage = errorMessage + "Θα πρέπει να είστε 16 και άνω!";
     }
 
-    var fav_genre = document.getElementById("fave_genre").selectedIndex;
+    var fav_genre = document.getElementById("faveGenre").selectedIndex;
     if (!fav_genre) {
       result = false;
       errorMessage += "Πρέπει να εισάγετε το αγαπημένο σας είδος!\n";
@@ -57,6 +45,54 @@ function validate_form() { //validates sign up form
       alert(errorMessage);
 
     return result;
+}
+
+function validate_username(inputId) { //validates username change
+  var result=true;
+
+  var errorMessage = '';
+
+  var username = document.getElementById(inputId).value;
+
+  if (username === null || username === '') {
+    result=false;
+    errorMessage = errorMessage + "Δεν δώσατε username!\n";
+  } else if (username.length < 8 || username.length > 15) {
+    result=false;
+    errorMessage = errorMessage + "Το username πρέπει να είναι από 8 έως 15 χαρακτήρες!\n";
+  }
+
+  if (errorMessage !== '') {
+    alert(errorMessage); // show message
+  }
+
+  return result;
+
+}
+
+function validate_email() {
+  var result = true;
+  var errorMessage = '';
+
+  var email = document.getElementById("email").value;
+
+  // Simple but solid regex for emails
+  var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (email === '') {
+    result = false;
+    errorMessage += "Δεν δώσατε email!\n";
+  } else if (!regex.test(email)) {
+    result = false;
+    errorMessage += "Το email δεν είναι έγκυρο!\n";
+  }
+
+  if (errorMessage !== '') {
+    alert(errorMessage);
+  }
+
+  return result;
+
 }
 
 function validate_title() { //validates list title
@@ -82,7 +118,7 @@ function togglelike() { //toggles like button
   let like = document.getElementById("like");
   let unlike = document.getElementById("unlike");
 
-  if (unlike.style.display === "none") { //strict equality?
+  if (unlike.style.display === "none") {
     like.style.display = "none";
     unlike.style.display = "inline-block";
     result = true;
@@ -100,7 +136,7 @@ function selected(element) {
   let avatars = document.getElementsByClassName("avatarpic");
   
   // Remove border from all avatars
-  for (let i = 0; i < avatars.length; i++) { //maybe find a better way?
+  for (let i = 0; i < avatars.length; i++) {
     avatars[i].style.border = "none";
   }
 

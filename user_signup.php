@@ -7,10 +7,10 @@
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $birthday = $_POST['birthday'];
-    $email = $_POST['email'];
-    $email_conf = $_POST['email_conf'];
-    $fave_genre = $_POST['fave_genre'];
+    $birthday = $_POST['bday'];
+    $email = $_POST['signupEmail'];
+    $email_conf = $_POST['signupEmailconf'];
+    $fave_genre = $_POST['faveGenre'];
 
     $usr_str = strlen($username);
     $ps_str = strlen($password);

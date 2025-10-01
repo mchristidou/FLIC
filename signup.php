@@ -32,22 +32,22 @@
 
         <div class="row g-3 align-items-center">
             <div class="col-sm-12">
-                <input type="text" name="email" id="email" class="form-control mb-3" placeholder="email" size="30" maxlength="100" />
+                <input type="text" name="signupEmail" id="signupEmail" class="form-control mb-3" placeholder="email" size="30" maxlength="100" />
             </div>
         </div>
 
         <div class="row g-3 align-items-center">
             <div class="col-sm-12">
-                <input type="text" name="email_conf" id="email_conf" class="form-control mb-3" placeholder="email confirmation" size="30" maxlength="100" />
+                <input type="text" name="signupEmailconf" id="signupEmailconf" class="form-control mb-3" placeholder="email confirmation" size="30" maxlength="100" />
             </div>
         </div>
 
         <div class="row g-3 align-items-center">
             <div class="mb-3 col-sm-6">
-            <input name="birthday" type="date" id="birthday" class="form-control" />
+            <input name="bday" type="date" id="bday" class="form-control" />
             </div>
             <div class="col-sm-6">
-                <select class="form-select mb-3" id="fave_genre" name="fave_genre">
+                <select class="form-select mb-3" id="faveGenre" name="faveGenre">
                     <option value="-1" selected="selected" >Select favorite genre</option> 
                     <?php $sql = "SELECT genres_id, name FROM genres";
                     $query = $db->prepare($sql);
