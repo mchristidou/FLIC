@@ -72,6 +72,7 @@
                                 $sql2 = "SELECT list_id, title FROM lists WHERE user_id = :user_id";
                                 $query2 = $db->prepare($sql2);
                                 $query2->execute(array(':user_id'=>$user_id));
+                                $listCount = 0;
                                 while ($result = $query2->fetch()) { ?>
                                     <form action="add_to_list.php" method="get">
                                         <div class="form-check">
@@ -81,8 +82,8 @@
                                             </label>
                                         </div>
                                         <input type="hidden" id="movie_id" name="movie_id" value="<?php echo $record['movie_id']; ?>">
-                                <?php }
-                                if ($result == 0) { ?>
+                                <?php $listCount++; }
+                                if ($listCount == 0) { ?>
                                     <p style="margin:10px;text-align:center;">No lists available.</p>
                                 <?php }
                                 $query->closeCursor();
