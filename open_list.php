@@ -39,7 +39,7 @@
                     $has_lists = false; 
                     while ($record = $query->fetch()) {
                         $has_lists = true; ?>
-                        <div class="card mt-3">
+                        <div class="card mt-1">
                             <div class="card-body">
                                 <a href="open_list.php?list_id=<?php echo $record['list_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
                                     echo $record['title'];
@@ -111,32 +111,34 @@
 
                     <hr>
 
-                    <?php if ($query->rowCount() == 0) { ?>
-                        <p style="text-align:center;">No movies added yet!</p>
-                    <?php } else { ?>
-                        <?php while ($record = $query->fetch()) { ?>
-                            <form action="delete_list_item.php" method="get">
-                                <div class="col">
-                                    <div class="card mt-2">
-                                        <div class="card-body">
-                                            <a href="movie_page.php?movie_id=<?php echo $record['movie_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
-                                                echo $record['movie_title']; 
-                                            ?></a>
-                                            <input type="hidden" name="movie_id" id="movie_id" value="<?php echo $record['movie_id']; ?>">
-                                            <input type="hidden" name="list_id" id="list_id" value="<?php echo $record['list_id']; ?>">
-                                            <button class="btn btn-sm" type="submit" style="float:right;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                                </svg>
-                                            </button>
+                    <div style="overflow-y: auto; max-height: 400px;">
+                        <?php if ($query->rowCount() == 0) { ?>
+                            <p style="text-align:center;">No movies added yet!</p>
+                        <?php } else { ?>
+                            <?php while ($record = $query->fetch()) { ?>
+                                <form action="delete_list_item.php" method="get">
+                                    <div class="col">
+                                        <div class="card mt-1">
+                                            <div class="card-body">
+                                                <a href="movie_page.php?movie_id=<?php echo $record['movie_id'];?>" class="text-dark" style="float:left;text-decoration:none;"><?php
+                                                    echo $record['movie_title']; 
+                                                ?></a>
+                                                <input type="hidden" name="movie_id" id="movie_id" value="<?php echo $record['movie_id']; ?>">
+                                                <input type="hidden" name="list_id" id="list_id" value="<?php echo $record['list_id']; ?>">
+                                                <button class="btn btn-sm" type="submit" style="float:right;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form></br>
-                        <?php } ?>
-                    <?php }
-                    $query->closeCursor(); ?>
+                                </form></br>
+                            <?php } ?>
+                        <?php }
+                        $query->closeCursor(); ?>
+                    </div>
                 </div>
 
                 <div class="col"> <!--MY LISTS-->
