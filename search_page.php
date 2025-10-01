@@ -32,8 +32,14 @@
             //movies
             $movies_sql = "SELECT movie_id, title, imdb_id FROM movies WHERE ";
             $params = [];
-            $movies_sql .= "title LIKE :search_value ORDER BY (title LIKE ':search_value') DESC, title";
-            $params[':search_value'] = "$search_value%";
+            if ($search_value > "A" && $search_value < "Z") {
+                $movies_sql .= "title LIKE :search_value OR title LIKE :lower_search_value ORDER BY (title LIKE ':search_value') DESC, title";
+                $params[':search_value'] = "$search_value%";
+                $params[':lower_search_value'] = strtolower($search_value) . "%";
+            } else {
+                $movies_sql .= "title LIKE :search_value";
+                $params[':search_value'] = "%$search_value%";
+            }
             $movies_query = $db->prepare($movies_sql);
             $movies_query->execute($params);
 
