@@ -4,7 +4,7 @@ function validate_form() { //validates sign up form
     var errorMessage = '';
 
     var email=document.getElementById("signupEmail").value;
-      // Simple but solid regex for emails
+      // Simple regex for emails
     var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (email === '') {
@@ -99,7 +99,7 @@ function validate_email() {
 
   var email = document.getElementById("email").value;
 
-  // Simple but solid regex for emails
+  // Simple regex for emails
   var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (email === '') {
