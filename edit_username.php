@@ -9,6 +9,9 @@
 
     $user_id = $_SESSION['user_id'];
     $new_username = $_POST['username'];
+    if (!$new_username) {
+        $new_username = $_POST['newUsername'];
+    }
     $_SESSION['username'] = $new_username;
 
     $sql = "UPDATE users 
