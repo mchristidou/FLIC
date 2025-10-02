@@ -20,10 +20,10 @@
     $db = null;
 
     if ($result > 0) {
-        header("Location: myprofile.php?msg=Your favourite genre changed successfully!");
+        header("Location: myprofile.php?msg=Το αγαπημένο σου είδος άλλαξε με επιτυχία!");
         exit();
     } else {
-        header("Location: myprofile.php?msg=Unsuccessfull change!");
+        header("Location: myprofile.php?msg=Αποτυχία αλλαγής!");
         exit();
     }
     ob_end_flush();
