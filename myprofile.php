@@ -76,7 +76,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                                <form action="edit_username.php" method="post" onsubmit="return validate_username(newUsername); ">
+                                <form action="edit_username.php" method="post" onsubmit="return validate_newUsername();">
                                     <div class="row g-3 align-items-center">
                                         <div class="input-group mb-3 col-sm-12">
                                             <input type="text" name="newUsername" id="newUsername" class="input-group form-control" placeholder="Username" aria-describedby="inputGroup-sizing-default" size="25" maxlength="25" />
@@ -422,7 +422,8 @@
                     <!-- DISPLAY DATA -->
                     <div class="col">
                         <p class="m-2">Username</p>
-                        <form action="edit_username.php" method="post" onsubmit="return validate_username(username);">
+                        <?php $inputId = 'username'; ?>
+                        <form action="edit_username.php" method="post" onsubmit="return validate_username();">
                             <div class="input-group mb-3">
                                 <input type="text" id="username" name="username" class="form-control" placeholder="<?php echo $record['username']; ?>" size="25" maxlength="25">
                                 <button type="submit" class="btn btn-dark">Change</button>

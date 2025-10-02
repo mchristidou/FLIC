@@ -47,12 +47,35 @@ function validate_form() { //validates sign up form
     return result;
 }
 
-function validate_username(inputId) { //validates username change
+function validate_username() { //validates username change
   var result=true;
 
   var errorMessage = '';
 
-  var username = document.getElementById(inputId).value;
+  var username = document.getElementById('username').value;
+
+  if (username === null || username === '') {
+    result=false;
+    errorMessage = errorMessage + "Δεν δώσατε username!\n";
+  } else if (username.length < 8 || username.length > 15) {
+    result=false;
+    errorMessage = errorMessage + "Το username πρέπει να είναι από 8 έως 15 χαρακτήρες!\n";
+  }
+
+  if (errorMessage !== '') {
+    alert(errorMessage); // show message
+  }
+
+  return result;
+
+}
+
+function validate_newUsername() { //validates username change
+  var result=true;
+
+  var errorMessage = '';
+
+  var username = document.getElementById('newUsername').value;
 
   if (username === null || username === '') {
     result=false;
